@@ -11,13 +11,13 @@ We want to measure the `response time` for a REST Endpoint invocation for one `U
 
 We invoke one REST endpoint for the test, protected with base authentication.
 
-Currenlty concurrent users aren't in focus and the [`System Under Test (SUT)`](https://glossary.istqb.org/en_US/term/system-under-test-2-1) the [`JMeter`](https://jmeter.apache.org/) performance test tool is running on the same local machine.  
+Currently, concurrent users aren't in focus, and the [`System Under Test (SUT)`](https://glossary.istqb.org/en_US/term/system-under-test-2-1) the [`JMeter`](https://jmeter.apache.org/) performance test tool is running on the same local machine.  
 
 ## 2. The `System Under Test`
 
-The `System Under Test` is based on the example you can find in the blog post [`Open the door wide open for Watson Assistant with “custom extensions” – an awesome progression`](https://suedbroecker.net/2022/11/16/open-the-door-into-the-wide-open-for-watson-assistant-with-custom-extensions-an-awesome-progression/) and the application can also run on `IBM Cloud Code Engine`.
+The `System Under Test` is based on the example you can find in the blog post [`Open the door wide open for Watson Assistant with "custom extensions" – an awesome progression`](https://suedbroecker.net/2022/11/16/open-the-door-into-the-wide-open-for-watson-assistant-with-custom-extensions-an-awesome-progression/) and the application can also run on `IBM Cloud Code Engine`.
 
-To run the example application locally, just follow these steps:
+To run the example application locally, follow these steps:
 
 1. Clone the project to your local computer
 
@@ -27,21 +27,27 @@ git clone https://github.com/thomassuedbroecker/extension-apis.git
 
 2. Follow the steps in this[ Run the Node.js application locally](https://github.com/thomassuedbroecker/extension-apis/blob/main/documentation/nodejs-application-development.md#1-run-nodejs-application-locally).
 
+The gif below shows a [Postman](https://www.postman.com) invocation of the endpoint we will invoke from our `HTTP Sampler` in the `JMeter` `Test Plan`.
+
+![](../images/01-sut-postman.gif)
+
 ## 3. The `JMeter` Test Plan
 
 ### 3.1 Outline of the Test Plan
 
 The following image contains the outline of the `Test Plan`.
 
-![](./images/01-jmeter-example-structure.png)
+![](../images/01-jmeter-example-structure.png)
 
-### 3.2 Basic configuation
+### 3.2 Basic configuration
 
 The following bullet points show the basic configuration for the Test Plan of our `Example Functional Performance Test`:
 
 * 1 `Thread Group`
 * 1 `User` 
 * 1 `HTTP Request`
+
+![](../images/01-jmeter-basic-configuration.png)
 
 ### 3.3 Application access configuration
 
@@ -79,11 +85,15 @@ Can you help me?
 "1","200","success","Can you help me?","Yes, I can help you."
 ```
 
+To use the CSV input, you must ensure that you configure the CSV file input in the JMeter UI. The following GIF shows how this works.
+
+![](../images/01-jmeter-set-csv-file.gif)
+
 ### 3.5 Pre and post-processing code
 
 We use the [Groovy](https://groovy-lang.org/) programming language to implement the custom pre and post-processing in the example Test Plan.
 
-#### 3.5.1 Load endpoint configuration
+#### 3.5.1 Load endpoint configuration (pre-processing)
 
 The following code shows how we load the `endpoint` and `API path`  in our `HTTP Request`. Later, we will save these values in custom `thread variables` and save them as `properties` to make them available in the entire Test Plan.
 
@@ -96,7 +106,7 @@ Using the properties:
 
 The image below shows where the variables are used in the `HTTP Sampler`.
 
-![](./images/01-jmeter-http-request.png)
+![](../images/01-jmeter-http-request.png)
 
 * The following code is in the `JSR223 PreProcessor - Load endpoint and question`:
 
@@ -131,7 +141,7 @@ log.info(port)
 log.info(protocol)
 ```
 
-#### 3.5.2 Create JSON payload 
+#### 3.5.2 Create JSON payload (pre-processing)
 
 The following code shows how to create the JSON payload for the `HTTP request` using the values from the CSV file, and we save it in the `inner-loop Uer Defined Variables` to make so it is only available in in the `inner-loop`.
 
@@ -141,7 +151,7 @@ Using the variable:
 
 The image below show how to use the variable in the `HTTP Sampler`.
 
-![](./images/01-jmeter-json-variable.png)
+![](../images/01-jmeter-json-variable.png)
 
 * Code of the `JSR223 PreProcessor - Create JSON payload`
 
@@ -169,7 +179,7 @@ We also do the `base64` encoding for `USER:PASSWORD` to provide this to the basi
 
 Using the property: `Basic ${__P(auth_encoded)}` 
 
-![](./images/01-jmeter-authentication.png)
+![](../images/01-jmeter-authentication.png)
 
 * Code in the `JSR223 PreProcessor - Load endpoint and question`.
 
@@ -207,6 +217,10 @@ We use the `JSR223 sampler` code with Groovy.
 
 #### 3.6.1 Using a `JSR223 sampler` to create a custom log file in a CSV format
 
+We save the CSV custom log file in the last element of our loop controller. The following images show the `JSR223 sampler`.
+
+![](../images/01-jmeter-write-log.png)
+
 We create a custom log file in a CSV format in the following source code.
 
 ```sh
@@ -214,10 +228,9 @@ We create a custom log file in a CSV format in the following source code.
 ```
 
 Therefore, we get the `loop counter` information, the exported variable name, to get the actual loop count.
-
 * Loop count variable: `loop_counter`
 
-![](./images/01-jmeter-loopcounter.png)
+![](../images/01-jmeter-loopcounter.png)
 
 ```groovy
 import groovy.json.*;
@@ -295,7 +308,7 @@ SampleResult.setResponseCode("200");
 
 #### 3.7.1 JSON Content Assertion
 
-We use the following code to extract information from the given `JSON` format of the response.
+We use the following code to extract information from the given `JSON` response format.
 
 * JSON format
 
@@ -403,9 +416,9 @@ nano user.properties
 
 For more details visit this page [Link](https://www.proficom.de/blog/lasttestauswertung-html-report-und-custom-graphs-in-jmeter/)
 
-### Step 2: Define bash automation configuration with environment variables
+### Step 2: Define the bash automation configuration with environment variables
 
-Create a environment variable file.
+Create an environment variable file.
 
 ```sh
 cat env_template > .env
@@ -447,7 +460,7 @@ Check : https://jmeter.apache.org/usermanual/best-practices.html
 
 * Open the Test Plan `performance-single.jmx` file and inspect the `test plan`
 
-![](./images/00-jmeter-edit-testplan.png)
+![](.../images/00-jmeter-edit-testplan.png)
 
 ### Step 5: Start JMeter performance test from the command line
 
@@ -489,7 +502,7 @@ JMeter: open results
 
 3. The the result in the `HTML report`
 
-![](./images/01-jmeter-webreport.png)
+![](.../images/01-jmeter-webreport.png)
 
 4. Source code of the bash automation:
 

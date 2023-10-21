@@ -134,7 +134,7 @@ log.info(auth_encoded)</stringProp>
         </Arguments>
         <hashTree/>
         <LoopController guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
-          <stringProp name="LoopController.loops">2</stringProp>
+          <stringProp name="LoopController.loops">1</stringProp>
         </LoopController>
         <hashTree>
           <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor - Load endpoint and question" enabled="true">
@@ -185,7 +185,7 @@ log.info(protocol)
           <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
             <stringProp name="delimiter">,</stringProp>
             <stringProp name="fileEncoding">UTF-8</stringProp>
-            <stringProp name="filename">/Users/thomassuedbroecker/Downloads/dev/performance-test-jmeter/question_list.csv</stringProp>
+            <stringProp name="filename">/Users/thomassuedbroecker/Downloads/dev/example-jmeter-functional-performance-test/question_list.csv</stringProp>
             <boolProp name="ignoreFirstLine">true</boolProp>
             <boolProp name="quotedData">false</boolProp>
             <boolProp name="recycle">true</boolProp>

@@ -1,11 +1,11 @@
 # Example `JMeter` functional performance test plan
 
-This project contain an `example functional performance test` using JMeter.
-These are the main section of the project.
+This project contains an `example functional performance test` using [`JMeter`](https://jmeter.apache.org/).
+These are the main sections of the project.
 
-1. [Installion of JMeter](/01-installation.md)
-2. [Structure of the `Test Plan` and it elements in JMeter for the `example functional performance test`.](/02-basic-structure-of-JMeter.md)
-3. [The example functional performance test and the test execution](/03-functional-performance-test-example.md)
+1. [Installation of JMeter](/documentation/01-installation.md)
+2. [Structure of the `Test Plan` and its elements in JMeter for the `example functional performance test`.](/documentation/02-basic-structure-of-JMeter.md)
+3. [The example functional performance test and the test execution](/documentation/03-functional-performance-test-example.md)
 
 ### Additional resources
 

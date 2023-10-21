@@ -2,7 +2,7 @@
 
 In this section, we get an overview of the used elements of JMeter for our Performance Test and see the basic structure.
 
-![](/images/01-jmeter-structure.png)
+![](../images/01-jmeter-structure.png)
 
 ## 1. Test plan
 

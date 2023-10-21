@@ -463,7 +463,10 @@ Check : https://jmeter.apache.org/usermanual/best-practices.html
 
 ![](../images/00-jmeter-edit-testplan.png)
 
-### Step 5: Start JMeter performance test from the command line
+### Step 5: Start the JMeter performance test from the command line
+
+It is usual to integrate test automation in many scenarios and this is the reason why I also create a bash auto
+action example that can be integrated in many scenarios.
 
 This bash automation does the following tasks:
 

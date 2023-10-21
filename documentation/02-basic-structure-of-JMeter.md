@@ -63,6 +63,6 @@ The [Assertions](https://jmeter.apache.org/usermanual/component_reference.html#a
 We use the [`Pre Processors`](https://jmeter.apache.org/usermanual/component_reference.html#preprocessors) to modify the `Samplers` in our case, for example, to prepare the HTTP basic authentication.
 In our case, we use the [`JSR223 PreProcessor`](https://jmeter.apache.org/usermanual/component_reference.html#JSR223_PreProcessor) with [`groovy`](https://groovy-lang.org/) scripting to implement a custom behavior.
 
-## 8. Post Processors and JSR223 PreProcessor
+## 8. Post Processors and JSR223 PostProcessor
 
 We use the [`Post Processors`](https://jmeter.apache.org/usermanual/component_reference.html#postprocessors)  to modify information after the execution of a `Samplers` in our case. For example, we write a custom log in addition to the logs of JMeter. Therefore, we use the [`JSR223 PostProcessor`](https://jmeter.apache.org/usermanual/component_reference.html#JSR223_PostProcessor).

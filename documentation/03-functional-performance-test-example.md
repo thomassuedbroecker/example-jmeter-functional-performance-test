@@ -525,7 +525,11 @@ JMeter: open results
 
 ![](../images/01-jmeter-webreport.png)
 
-4. Source code of the bash automation:
+4. The following GIF show the created folders and test result files.
+
+![](../images/01-jmeter-test-result.gif)
+
+5. Source code of the bash automation:
 
 ```sh
 #!/bin/bash

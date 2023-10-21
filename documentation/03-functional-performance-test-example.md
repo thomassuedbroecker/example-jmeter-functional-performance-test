@@ -1,5 +1,8 @@
 # Example Functional Performance Test
 
+This is an example and contains many potentials for optimization, so feel free to optimize it to your need and use it as a starting point.
+Below is the high-level table of content overview in this section.
+
 1. Test Objectives
 2. The `System Under Test`
 3. The JMeter Test Plan
@@ -498,7 +501,7 @@ Tidying up ...    @ 2023 Oct 21 16:35:32 CEST (1697898932001)
 JMeter: open results
 ```
 
-3. The the result in the `HTML report`
+3. The results in the `HTML report`
 
 ![](../images/01-jmeter-webreport.png)
 

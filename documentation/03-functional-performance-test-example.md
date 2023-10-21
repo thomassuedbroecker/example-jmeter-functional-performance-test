@@ -1,7 +1,7 @@
 # Example Functional Performance Test
 
-This is an example and contains many potentials for optimization, so feel free to optimize it to your need and use it as a starting point.
-Below is the high-level table of content overview in this section.
+This example contains many potentials for optimization, so feel free to optimize it to your needs and use it as a starting point.
+Below is the high-level table of contents overview in this section.
 
 1. Test Objectives
 2. The `System Under Test`
@@ -231,6 +231,7 @@ We create a custom log file in a CSV format in the following source code.
 ```
 
 Therefore, we get the `loop counter` information, the exported variable name, to get the actual loop count.
+
 * Loop count variable: `loop_counter`
 
 ![](../images/01-jmeter-loopcounter.png)
@@ -309,9 +310,23 @@ SampleResult.setResponseCode("200");
 
 ### 3.7 Assertion
 
-#### 3.7.1 JSON Content Assertion
+#### 3.7.1 Response Assertion
 
-We use the following code to extract information from the given `JSON` response format.
+In the `Response Assertion`, we verify the response code.
+The following image shows the configuration.
+
+![](../images/01-jmeter-response-code-verification.png)
+
+#### 3.7.2 JSON Content Assertion
+
+In the `JSON Content Assertion`, we verify the JSON Content automatically.
+The following image shows the configuration.
+
+![](../images/01-jmeter-json-variable.png)
+
+#### 3.7.3 JSON Assertion
+
+We use the following code to extract information from the given `JSON` response format, and verify it manually.
 
 * JSON format
 

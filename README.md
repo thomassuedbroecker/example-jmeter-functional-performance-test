@@ -1,4 +1,4 @@
-# JMeter
+# Example `JMeter` functional performance test plan
 
 This project contain an `example functional performance test` using JMeter.
 These are the main section of the project.

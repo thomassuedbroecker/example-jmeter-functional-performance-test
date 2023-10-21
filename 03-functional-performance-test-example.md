@@ -1,4 +1,4 @@
-# Example Performance Test
+# Example Functional Performance Test
 
 1. Test Objectives
 2. The `System Under Test`
@@ -13,7 +13,7 @@ We invoke one REST endpoint for the test, protected with base authentication.
 
 Currenlty concurrent users aren't in focus and the [`System Under Test (SUT)`](https://glossary.istqb.org/en_US/term/system-under-test-2-1) the [`JMeter`](https://jmeter.apache.org/) performance test tool is running on the same local machine.  
 
-## 2. The `system under test`
+## 2. The `System Under Test`
 
 The `System Under Test` is based on the example you can find in the blog post [`Open the door wide open for Watson Assistant with “custom extensions” – an awesome progression`](https://suedbroecker.net/2022/11/16/open-the-door-into-the-wide-open-for-watson-assistant-with-custom-extensions-an-awesome-progression/) and the application can also run on `IBM Cloud Code Engine`.
 
@@ -27,7 +27,7 @@ git clone https://github.com/thomassuedbroecker/extension-apis.git
 
 2. Follow the steps in this[ Run the Node.js application locally](https://github.com/thomassuedbroecker/extension-apis/blob/main/documentation/nodejs-application-development.md#1-run-nodejs-application-locally).
 
-## 3. The JMeter Test Plan
+## 3. The `JMeter` Test Plan
 
 ### 3.1 Outline of the Test Plan
 
@@ -60,7 +60,7 @@ export _QUESTIONS_CSV_PATH=$(pwd)/question_list.csv
 
 ### 3.4 Provide the data to loop the REST endpoint invocation and save the results
 
-We will load all questions for an `User`  to send in the request based on the CSV file content, and then we create a `log file` in a CSV format that contains the following information:
+We will load all questions for an `User` to send in the request based on the CSV file content, and then we create a `log file` in a CSV format that contains the following information:
 
 * Input format for the questions:
 

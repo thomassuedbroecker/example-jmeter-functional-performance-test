@@ -1,0 +1,619 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.6.2">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Functional Performance Test single" enabled="true">
+      <boolProp name="TestPlan.functional_mode">true</boolProp>
+      <boolProp name="TestPlan.tearDown_on_shutdown">true</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments"/>
+      </elementProp>
+    </TestPlan>
+    <hashTree>
+      <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="Global Variables" enabled="true">
+        <collectionProp name="Arguments.arguments">
+          <elementProp name="question_csv_path" elementType="Argument">
+            <stringProp name="Argument.name">question_csv_path</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+        </collectionProp>
+      </Arguments>
+      <hashTree/>
+      <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor - Load csv file paths" enabled="true">
+        <stringProp name="scriptLanguage">groovy</stringProp>
+        <stringProp name="parameters"></stringProp>
+        <stringProp name="filename"></stringProp>
+        <stringProp name="cacheKey">true</stringProp>
+        <stringProp name="script">log.info(&quot;*******************************************&quot;)
+log.info(&quot;*** 1. Load environment configuration  ****&quot;)
+log.info(&quot;*******************************************&quot;)
+
+log.info(&quot;*** Load env variables&quot;);
+String question_csv_path_env = System.getenv(&quot;_QUESTIONS_CSV_PATH&quot;);
+String results_csv_path_env = System.getenv(&quot;_RESULTS_CSV_PATH&quot;);
+
+log.info(&quot;*** Set JMeter variables&quot;);
+vars.put(&quot;question_csv_path&quot;, question_csv_path_env );
+props.put(&quot;question_csv_path&quot;, question_csv_path_env);
+vars.put(&quot;results_csv_path&quot;, results_csv_path_env );
+props.put(&quot;results_csv_path&quot;, results_csv_path_env);
+
+
+log.info(&quot;*** Show local variable and property values&quot;)
+log.info(question_csv_path_env)
+log.info(results_csv_path_env)
+
+
+</stringProp>
+      </JSR223PreProcessor>
+      <hashTree/>
+      <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor - Load authentication credentials" enabled="true">
+        <stringProp name="cacheKey">true</stringProp>
+        <stringProp name="filename"></stringProp>
+        <stringProp name="parameters"></stringProp>
+        <stringProp name="script">log.info(&quot;*******************************************&quot;)
+log.info(&quot;*** 2. Load environment configuration ******&quot;)
+log.info(&quot;*******************************************&quot;)
+
+String username_env = System.getenv(&quot;_USERNAME&quot;)
+String password_env = System.getenv(&quot;_PASSWORD&quot;)
+
+log.info(&quot;*** Set JMeter variables&quot;)
+vars.put(&quot;username&quot;, username_env )
+vars.put(&quot;password&quot;, password_env)
+
+String username = vars.get(&apos;username&apos;)
+String password = vars.get(&apos;password&apos;)
+log.info(&quot;*** Show local variables values&quot;)
+log.info(username)
+log.info(password)
+
+log.info(&quot;*** Create base64 encoding&quot;)
+def auth = username + &quot;:&quot; + password
+auth_encoded = auth.bytes.encodeBase64().toString()
+vars.put(&quot;auth_encoded&quot;,auth_encoded);
+props.put(&quot;auth_encoded&quot;,auth_encoded);
+log.info(&quot;*** Show encoding result&quot;)
+log.info(auth)
+log.info(auth_encoded)</stringProp>
+        <stringProp name="scriptLanguage">groovy</stringProp>
+        <stringProp name="TestPlan.comments">Loads Authentication Credentials from Environment Variables</stringProp>
+      </JSR223PreProcessor>
+      <hashTree/>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="ThreadGroup_1" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <stringProp name="LoopController.loops">1</stringProp>
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <boolProp name="ThreadGroup.delayedStart">false</boolProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+      </ThreadGroup>
+      <hashTree>
+        <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="Thread Variables" enabled="true">
+          <collectionProp name="Arguments.arguments">
+            <elementProp name="username" elementType="Argument">
+              <stringProp name="Argument.name">username</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="password" elementType="Argument">
+              <stringProp name="Argument.name">password</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="auth_encoded" elementType="Argument">
+              <stringProp name="Argument.name">auth_encoded</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="response" elementType="Argument">
+              <stringProp name="Argument.name">response</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="endpoint" elementType="Argument">
+              <stringProp name="Argument.name">endpoint</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="api_path" elementType="Argument">
+              <stringProp name="Argument.name">api_path</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="port" elementType="Argument">
+              <stringProp name="Argument.name">port</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="protocol" elementType="Argument">
+              <stringProp name="Argument.name">protocol</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+          </collectionProp>
+          <stringProp name="TestPlan.comments">For authentication and endpoint configuration</stringProp>
+        </Arguments>
+        <hashTree/>
+        <LoopController guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <stringProp name="LoopController.loops">2</stringProp>
+        </LoopController>
+        <hashTree>
+          <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor - Load endpoint and question" enabled="true">
+            <stringProp name="scriptLanguage">groovy</stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="script">log.info(&quot;******************************************&quot;)
+log.info(&quot;** 3.Load environment configuration ******&quot;)
+log.info(&quot;******************************************&quot;)
+
+String endpoint_env = System.getenv(&quot;_ENDPOINT&quot;);
+String api_path_env = System.getenv(&quot;_API_PATH&quot;);
+String port_env = System.getenv(&quot;_PORT&quot;);
+String protocol_env = System.getenv(&quot;_PROTOCOL&quot;);
+
+vars.put(&quot;endpoint&quot;, endpoint_env );
+vars.put(&quot;api_path&quot;, api_path_env );
+props.put(&quot;endpoint&quot;,endpoint_env);
+props.put(&quot;api_path&quot;,api_path_env);
+vars.put(&quot;port&quot;, port_env );
+props.put(&quot;port&quot;, port_env);
+vars.put(&quot;protocol&quot;, protocol_env );
+props.put(&quot;protocol&quot;, protocol_env);
+
+String endpoint= vars.get(&apos;endpoint&apos;)
+String api_path= vars.get(&apos;api_path&apos;)
+String port= vars.get(&apos;port&apos;)
+String protocol= vars.get(&apos;protocol&apos;)
+
+log.info(&quot;*** Show local variables values&quot;)
+log.info(endpoint)
+log.info(api_path)
+log.info(port)
+log.info(protocol)
+</stringProp>
+          </JSR223PreProcessor>
+          <hashTree/>
+          <CounterConfig guiclass="CounterConfigGui" testclass="CounterConfig" testname="LoopCounter" enabled="true">
+            <stringProp name="CounterConfig.start">1</stringProp>
+            <stringProp name="CounterConfig.end"></stringProp>
+            <stringProp name="CounterConfig.incr">1</stringProp>
+            <stringProp name="CounterConfig.name">loop_counter</stringProp>
+            <stringProp name="CounterConfig.format"></stringProp>
+            <boolProp name="CounterConfig.per_user">false</boolProp>
+          </CounterConfig>
+          <hashTree/>
+          <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
+            <stringProp name="delimiter">,</stringProp>
+            <stringProp name="fileEncoding">UTF-8</stringProp>
+            <stringProp name="filename">/Users/thomassuedbroecker/Downloads/dev/performance-test-jmeter/question_list.csv</stringProp>
+            <boolProp name="ignoreFirstLine">true</boolProp>
+            <boolProp name="quotedData">false</boolProp>
+            <boolProp name="recycle">true</boolProp>
+            <stringProp name="shareMode">shareMode.all</stringProp>
+            <boolProp name="stopThread">false</boolProp>
+            <stringProp name="variableNames">question</stringProp>
+          </CSVDataSet>
+          <hashTree/>
+          <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="Inner loop User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="json_payload" elementType="Argument">
+                <stringProp name="Argument.name">json_payload</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </Arguments>
+          <hashTree/>
+          <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor - Create JSON payload" enabled="true">
+            <stringProp name="scriptLanguage">groovy</stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="script">log.info(&quot;*******************************************&quot;)
+log.info(&quot;***** 4. Create payload for the request ***&quot;)
+log.info(&quot;*******************************************&quot;)
+String question = vars.get(&apos;question&apos;)
+props.put(&apos;question&apos;, question)
+log.info(&quot;Question: &quot; + question)
+
+String json_payload = &quot;{\&quot;query\&quot;:\&quot;text:&quot; + question + &quot;\&quot;}&quot;;
+vars.put(&quot;json_payload&quot;,json_payload);
+log.info(&quot;*** json payload ******&quot;)
+log.info(json_payload)</stringProp>
+          </JSR223PreProcessor>
+          <hashTree/>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="example-api-request" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">${json_payload}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">${__P(endpoint)}</stringProp>
+            <stringProp name="HTTPSampler.port">${__P(port)}</stringProp>
+            <stringProp name="HTTPSampler.protocol">${__P(protocol)}</stringProp>
+            <stringProp name="HTTPSampler.path">${__P(api_path)}</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">false</boolProp>
+            <boolProp name="HTTPSampler.image_parser">false</boolProp>
+            <boolProp name="HTTPSampler.concurrentDwn">false</boolProp>
+            <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+            <boolProp name="HTTPSampler.md5">false</boolProp>
+            <intProp name="HTTPSampler.ipSourceType">0</intProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <collectionProp name="HeaderManager.headers">
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Content-Type</stringProp>
+                  <stringProp name="Header.value">application/json</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Authorization</stringProp>
+                  <stringProp name="Header.value">Basic ${__P(auth_encoded)} </stringProp>
+                </elementProp>
+              </collectionProp>
+            </HeaderManager>
+            <hashTree/>
+            <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="JSONContent-Assertion" enabled="true">
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="script">import groovy.json.*;
+
+log.info(&quot;**********************************&quot;)
+log.info(&quot;***** 5. JSONContent-Assertion ***&quot;)
+log.info(&quot;**********************************&quot;)
+
+String responsecode = prev.getResponseCode();
+props.put(&apos;responsecode&apos;,responsecode)
+
+def response = prev.getResponseDataAsString();  
+def json_response = new JsonSlurper().parseText(response);
+String document_retrieval_strategy = json_response.retrievalDetails.document_retrieval_strategy;
+String assertion_name = &quot;document_retrieval_strategy&quot;;
+String message = &quot;&quot;;
+boolean verfication = false;
+
+if (document_retrieval_strategy.equals(&quot;llm&quot;) &amp;&amp; (responsecode == &quot;200&quot;)){
+	verfication = false;
+	AssertionResult.setError(verfication);
+	AssertionResult.setFailure(verfication);
+	log.info(&quot;success&quot;)
+	String answer = json_response.results[0].text[0];
+     props.put(&apos;answer&apos;,answer)
+     props.put(&apos;status&apos;,&apos;success&apos;)
+} else {
+	verfication = true;
+	String question = vars.get(&apos;question&apos;)
+	message = &quot;responsecode:\n&quot; + responsecode + &quot;\nquestion:\n&quot; + question + &quot;\nfull json response: \n&quot; + json_response;
+	AssertionResult.setFailureMessage(message);
+	AssertionResult.setFailure(verfication);
+	AssertionResult.setError(verfication)
+	log.info(&quot;error&quot;)
+	String answer = message;
+     props.put(&apos;answer&apos;,answer)
+     props.put(&apos;status&apos;,&apos;failed&apos;)
+}</stringProp>
+              <stringProp name="scriptLanguage">groovy</stringProp>
+            </JSR223Assertion>
+            <hashTree/>
+            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="ResponseCode-Assertion" enabled="true">
+              <collectionProp name="Asserion.test_strings">
+                <stringProp name="49586">200</stringProp>
+              </collectionProp>
+              <stringProp name="Assertion.custom_message"></stringProp>
+              <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+              <boolProp name="Assertion.assume_success">false</boolProp>
+              <intProp name="Assertion.test_type">2</intProp>
+            </ResponseAssertion>
+            <hashTree/>
+            <JSONPathAssertion guiclass="JSONPathAssertionGui" testclass="JSONPathAssertion" testname="JSONAssertion" enabled="true">
+              <stringProp name="JSON_PATH">$.retrievalDetails.document_retrieval_strategy</stringProp>
+              <stringProp name="EXPECTED_VALUE">llm</stringProp>
+              <boolProp name="JSONVALIDATION">true</boolProp>
+              <boolProp name="EXPECT_NULL">false</boolProp>
+              <boolProp name="INVERT">false</boolProp>
+              <boolProp name="ISREGEX">false</boolProp>
+            </JSONPathAssertion>
+            <hashTree/>
+          </hashTree>
+          <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="JSR223 PostProcessor - Write log custom CSV results" enabled="false">
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="script">import groovy.json.*;
+import groovy.csv.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+log.info(&quot;*************************************&quot;)
+log.info(&quot;***** 6. Write custom CSV file ******&quot;)
+log.info(&quot;*************************************&quot;)
+
+// get properies and variables
+String loop_counter = vars.get(&apos;loop_counter&apos;)
+String question = props.get(&apos;question&apos;)
+String answer = props.get(&apos;answer&apos;)
+String status = props.get(&apos;status&apos;)
+String responsecode = props.get(&apos;responsecode&apos;)
+String results_csv_path = props.get(&apos;results_csv_path&apos;);
+
+log.info(results_csv_path_env)
+log.info(loop_counter)
+log.info(status)
+log.info(question)
+log.info(answer)
+log.info(responsecode)
+
+answer = answer.replaceAll(&quot;\&quot;&quot;,&quot;&apos;&quot;);
+question = question.replaceAll(&quot;\&quot;&quot;,&quot;&apos;&quot;);
+
+// Create csv output file
+FileWriter fstream = new FileWriter(results_csv_path_env ,true);
+BufferedWriter out = new BufferedWriter(fstream);
+
+String w_question = &apos;&quot;&apos; + question + &apos;&quot;&apos;
+String w_answer = &apos;&quot;&apos; + answer + &apos;&quot;&apos;
+String w_loop_counter = &apos;&quot;&apos; + loop_counter + &apos;&quot;&apos;
+String w_status = &apos;&quot;&apos; + status + &apos;&quot;&apos;
+String w_responsecode = &apos;&quot;&apos; + responsecode + &apos;&quot;&apos;
+
+out.write(w_loop_counter);
+out.write(&quot;,&quot;);
+out.write(w_responsecode);
+out.write(&quot;,&quot;);
+out.write(w_status);
+out.write(&quot;,&quot;);
+out.write(w_question);
+out.write(&quot;,&quot;);
+out.write(w_answer);
+out.newLine();
+out.flush();
+
+// reset properies
+props.put(&apos;question&apos;,&apos;unknown&apos;)
+props.put(&apos;answer&apos;,&apos;unknown&apos;)
+props.put(&apos;status&apos;,&apos;unknown&apos;)
+props.put(&apos;responsecode&apos;,&apos;unknown&apos;)</stringProp>
+            <stringProp name="scriptLanguage">groovy</stringProp>
+          </JSR223PostProcessor>
+          <hashTree/>
+          <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="JSR223 Sampler - Write log" enabled="true">
+            <stringProp name="scriptLanguage">groovy</stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="script">import groovy.json.*;
+import groovy.csv.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+log.info(&quot;*************************************&quot;)
+log.info(&quot;***** 7. Write custom CSV file ******&quot;)
+log.info(&quot;*************************************&quot;)
+
+// Don&apos;t include sampler result
+SampleResult.setIgnore();
+
+// values properies
+String loop_counter = vars.get(&apos;loop_counter&apos;)
+String question = vars.get(&apos;question&apos;)
+String answer = &quot;&quot;
+String response_type = &quot;&quot;
+String responsecode = prev.getResponseCode();
+String results_csv_path = props.get(&apos;results_csv_path&apos;);
+String message = &quot;&quot;;
+
+if (responsecode == &quot;200&quot;) {
+	def response = prev.getResponseDataAsString();  
+	def json_response = new JsonSlurper().parseText(response);
+     String document_retrieval_strategy = json_response.retrievalDetails.document_retrieval_strategy;
+     
+	if (document_retrieval_strategy.equals(&quot;llm&quot;)) {
+		  answer = json_response.results[0].text[0];	
+	} else {				
+	       message = &quot;responsecode:\n&quot; + responsecode + &quot;\nquestion:\n&quot; + question + &quot;\nfull json response: \n&quot; + json_response
+	       answer = message;
+	}
+} else {
+	message = &quot;responsecode:\n&quot; + responsecode + &quot;\nquestion:\n&quot; + question + &quot;\n doesn&apos;t work&quot;;
+	answer = message;
+	log.info(&quot;error&quot;)
+}
+
+log.info(results_csv_path)
+log.info(loop_counter)
+log.info(question)
+log.info(answer)
+log.info(responsecode)
+
+answer = answer.replaceAll(&quot;\&quot;&quot;,&quot;&apos;&quot;);
+question = question.replaceAll(&quot;\&quot;&quot;,&quot;&apos;&quot;);
+
+FileWriter fstream = new FileWriter(results_csv_path ,true);
+BufferedWriter out = new BufferedWriter(fstream);
+
+String w_question = &apos;&quot;&apos; + question + &apos;&quot;&apos;
+String w_answer = &apos;&quot;&apos; + answer + &apos;&quot;&apos;
+String w_loop_counter = &apos;&quot;&apos; + loop_counter + &apos;&quot;&apos;
+String w_responsecode = &apos;&quot;&apos; + responsecode + &apos;&quot;&apos;
+
+out.write(w_loop_counter);
+out.write(&quot;,&quot;);
+out.write(w_responsecode);
+out.write(&quot;,&quot;);
+out.write(w_question);
+out.write(&quot;,&quot;);
+out.write(w_answer);
+out.newLine();
+out.flush();
+
+// Set SampleResult
+SampleResult.setResponseData(&quot;Logfile creation in sampler: Values are written to CSV file: &quot; + results_csv_path);
+SampleResult.sampleEnd();
+SampleResult.setResponseCode(&quot;200&quot;);</stringProp>
+          </JSR223Sampler>
+          <hashTree/>
+        </hashTree>
+      </hashTree>
+      <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="1-Summary-Report" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>true</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <sentBytes>true</sentBytes>
+            <url>true</url>
+            <hostname>true</hostname>
+            <threadCounts>true</threadCounts>
+            <sampleCount>true</sampleCount>
+            <idleTime>true</idleTime>
+            <connectTime>true</connectTime>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
+      <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="2-View-Results-Tree" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <sentBytes>true</sentBytes>
+            <url>true</url>
+            <threadCounts>true</threadCounts>
+            <idleTime>true</idleTime>
+            <connectTime>true</connectTime>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
+      <ResultCollector guiclass="AssertionVisualizer" testclass="ResultCollector" testname="3-Assertion-Results" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <sentBytes>true</sentBytes>
+            <url>true</url>
+            <threadCounts>true</threadCounts>
+            <idleTime>true</idleTime>
+            <connectTime>true</connectTime>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
+      <ResultCollector guiclass="RespTimeGraphVisualizer" testclass="ResultCollector" testname="4-Response-Time-Graph" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <sentBytes>true</sentBytes>
+            <url>true</url>
+            <threadCounts>true</threadCounts>
+            <idleTime>true</idleTime>
+            <connectTime>true</connectTime>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>

@@ -1,0 +1,7 @@
+export _USERNAME="admin"
+export _PASSWORD="admin"
+export _ENDPOINT=localhost
+export _API_PATH=/v1/query
+export _PROTOCOL=http
+export _PORT=3000
+export _QUESTIONS_CSV_PATH=$(pwd)/question_list.csv

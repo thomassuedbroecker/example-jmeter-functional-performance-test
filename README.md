@@ -10,4 +10,5 @@ These are the main sections of the project.
 ### Additional resources
 
 * [REST API Load performance testing using Apache JMeter](https://medium.com/javarevisited/rest-api-load-performance-testing-using-apache-jmeter-63605572e862)
-* [JSON](https://docs.groovy-lang.org/next/html/gapi/groovy/json/JsonSlurper.html)
+* [Handle JSON in `Groovy`](https://docs.groovy-lang.org/next/html/gapi/groovy/json/JsonSlurper.html)
+* [Configure HTML Report details (german)](https://www.proficom.de/blog/lasttestauswertung-html-report-und-custom-graphs-in-jmeter/)

@@ -414,8 +414,6 @@ ls
 nano user.properties
 ```
 
-For more details visit this page [Link](https://www.proficom.de/blog/lasttestauswertung-html-report-und-custom-graphs-in-jmeter/)
-
 ### Step 2: Define the bash automation configuration with environment variables
 
 Create an environment variable file.

@@ -460,7 +460,7 @@ Check : https://jmeter.apache.org/usermanual/best-practices.html
 
 * Open the Test Plan `performance-single.jmx` file and inspect the `test plan`
 
-![](.../images/00-jmeter-edit-testplan.png)
+![](../images/00-jmeter-edit-testplan.png)
 
 ### Step 5: Start JMeter performance test from the command line
 
@@ -502,7 +502,7 @@ JMeter: open results
 
 3. The the result in the `HTML report`
 
-![](.../images/01-jmeter-webreport.png)
+![](../images/01-jmeter-webreport.png)
 
 4. Source code of the bash automation:
 

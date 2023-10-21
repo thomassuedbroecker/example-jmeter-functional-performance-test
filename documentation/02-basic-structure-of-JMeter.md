@@ -49,11 +49,11 @@ We use the [`HTTP Request`](https://jmeter.apache.org/usermanual/component_refer
 
 ### 5.2 `JSR223_Sampler`
 
-The [`JSR223_Sampler`](https://jmeter.apache.org/usermanual/component_reference.html#JSR223_Sampler) can be used set properties or variables. In the example, we use it to create our own CSV file.
+The [`JSR223_Sampler`](https://jmeter.apache.org/usermanual/component_reference.html#JSR223_Sampler) can be used to set properties or variables. In the example, we use it to create our own CSV file.
 
 ## 6. Assertions, Response Assertion, and JSON Assertion
 
-The [Assertions](https://jmeter.apache.org/usermanual/component_reference.html#assertions) do contain the verification points we can define to inspect the response and the response values in our case in a JSON format.
+The [Assertions](https://jmeter.apache.org/usermanual/component_reference.html#assertions) contain the verification points we can define to inspect the response and the response values in our case in a JSON format.
 
 * [`Response Assertion`](https://jmeter.apache.org/usermanual/component_reference.html#Response_Assertion)
 * [`JSON Assertion`](https://jmeter.apache.org/usermanual/component_reference.html#JSON_Assertion)
@@ -65,4 +65,4 @@ In our case, we use the [`JSR223 PreProcessor`](https://jmeter.apache.org/userma
 
 ## 8. Post Processors and JSR223 PreProcessor
 
-We use the [`Post Processors`](https://jmeter.apache.org/usermanual/component_reference.html#postprocessors)  to modify information after the execution of a `Samplers` in our case. For example, we write a custom log in addition to the logs of JMeter. Therefore we use the [`JSR223 PostProcessor`](https://jmeter.apache.org/usermanual/component_reference.html#JSR223_PostProcessor).
+We use the [`Post Processors`](https://jmeter.apache.org/usermanual/component_reference.html#postprocessors)  to modify information after the execution of a `Samplers` in our case. For example, we write a custom log in addition to the logs of JMeter. Therefore, we use the [`JSR223 PostProcessor`](https://jmeter.apache.org/usermanual/component_reference.html#JSR223_PostProcessor).

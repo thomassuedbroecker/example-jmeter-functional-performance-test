@@ -324,7 +324,7 @@ The following image shows the configuration.
 In the `JSON Content Assertion`, we verify the JSON Content automatically.
 The following image shows the configuration.
 
-![](../images/01-jmeter-json-variable.png)
+![](../images/01-jmeter-json-verification.png)
 
 #### 3.7.3 JSON Assertion
 

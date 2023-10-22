@@ -2,7 +2,7 @@
 
 This project contains an `example functional performance test` using [`JMeter`](https://jmeter.apache.org/).
 
-The reason to call this example a **Functional Performance Test Plan** is that we are not verifying the performance of a working System Under Test with a focus on the response times. We also demonstrate that System Under Test works functionally and delivers the correct response content values. Therefore, we also enable Functional Test Mode (i.e. save Response Data and Sampler Data) for the Test Plan.
+The reason to call this example a **Functional Performance Test Plan** is that we are not verifying the performance of a working System Under Test with a focus on the response times only. We also demonstrate that System Under Test works functionally and delivers the correct response content values. Therefore, we also enable Functional Test Mode (i.e. save Response Data and Sampler Data) for the Test Plan.
 
 ![](/images/01-jmeter-save-functional-response-vales.png)
 

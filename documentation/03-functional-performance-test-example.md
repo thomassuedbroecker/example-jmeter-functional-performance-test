@@ -96,6 +96,8 @@ To use the CSV input, you must ensure that you configure the CSV file input in t
 
 We use the [Groovy](https://groovy-lang.org/) programming language to implement the custom pre and post-processing in the example Test Plan.
 
+[Groovy](https://groovy-lang.org/) is a [JSR223 Scripting](https://www.openhab.org/docs/configuration/jsr223.html) compliant language. [JSR223 Scripting](https://www.openhab.org/docs/configuration/jsr223.html) is the standard scripting API for Java Virtual Machine (JVM).
+
 In many situations of the pre or post-processing, I save values in custom `variables` and as `properties` to make them available in the entire Test Plan. Keeping the values in both is redundant and unnecessary, so feel free to optimize this ;-).
 
 #### 3.5.1 Load endpoint configuration (pre-processing)

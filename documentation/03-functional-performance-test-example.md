@@ -319,14 +319,14 @@ The following image shows the configuration.
 
 ![](../images/01-jmeter-response-code-verification.png)
 
-#### 3.7.2 JSON Content Assertion
+#### 3.7.2 JSON Assertion
 
-In the `JSON Content Assertion`, we verify the JSON Content automatically.
+In the `JSON Assertion`, we verify the JSON Content automatically.
 The following image shows the configuration.
 
 ![](../images/01-jmeter-json-verification.png)
 
-#### 3.7.3 JSON Assertion
+#### 3.7.3 JSON Content Assertion
 
 We use the following code to extract information from the given `JSON` response format, and verify it manually.
 
